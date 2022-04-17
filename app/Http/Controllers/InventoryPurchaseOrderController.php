@@ -190,4 +190,22 @@ class InventoryPurchaseOrderController extends Controller
         return redirect('/purchase-show-all')->with('success', 'Successfully Updated');
     }
 
+    public function purchaseView($id)
+    {
+        $sellers = InventorySeller::all();
+        $products = InventoryItem::all();
+        $purchase_order = DB::table('inventory_purchase_orders')
+            ->join('inventory_sellers', 'inventory_sellers.id', '=', 'inventory_purchase_orders.seller_id')
+            ->select('inventory_purchase_orders.*', 'inventory_sellers.seller_name')
+            ->where('inventory_purchase_orders.id', '=', $id)
+            ->first();
+
+        $permanent_purchase_items = DB::table('inventory_purchase_items')
+            ->join('inventory_items', 'inventory_items.id', '=', 'inventory_purchase_items.item_id')
+            ->select('inventory_purchase_items.*', 'inventory_items.item_name')
+            ->where('inventory_purchase_items.purchase_order_id', '=', $id)
+            ->get();
+
+        return view('inventory.purchase.purchaseView', compact('purchase_order', 'permanent_purchase_items', 'sellers', 'products'));
+    }
 }
