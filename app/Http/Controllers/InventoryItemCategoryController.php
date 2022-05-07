@@ -27,8 +27,7 @@ class InventoryItemCategoryController extends Controller
         $item_category->user_id=Auth::user()->emp_id;
         $item_category->save();
 
-        $actvity = 'Add New Item Category Category_id :-  - '. $item_category->id;
-        $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
+        
 
         return redirect('/item-category-show-all')->with('success','Successfully Recorded');
     } else {
@@ -40,8 +39,7 @@ class InventoryItemCategoryController extends Controller
         $item_category->item_cat_des=$request->description;
         $item_category->save();
 
-        $actvity = 'Update Item Category Category_id :-  - '. $item_category->id;
-        $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
+       
 
         return redirect('/item-category-show-all')->with('success','Successfully Updated');
     }

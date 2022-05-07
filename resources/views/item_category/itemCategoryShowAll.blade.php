@@ -1,19 +1,7 @@
 @extends('layouts.navigation')
 @section('item_category', 'active')
 @section('content')
-<?php 
-  $Access=session()->get('Access'); 
-  $itemTypeAdd=true;
-  $itemTypeEdit=true;
-  
-  if (in_array('inventory.productTypeAddProcess', $Access)) {
-    $itemTypeAdd=true;
-  }
 
-  if (in_array('inventory.productTypeUpdateProcess', $Access)) {
-    $itemTypeEdit=true;
-  }
-?>
 
   <!-- Main Content -->
   <div class="card">                
