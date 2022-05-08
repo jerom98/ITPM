@@ -53,6 +53,10 @@
                                         data-brand="{{ $brand->brand_name }}" data-des="{{ $brand->brand_des }}"
                                         data-target="#add" title="edit" class="btn btn-primary btn-edit"><i
                                             class="far fa-edit"></i></button>
+
+                                            
+                                            <a  onclick="return confirm('Are you sure you want to delete this raw?');" href="/brands-delete-all/{{$brand->id}}" class="btn btn-icon btn-danger btn-edit"> <i
+                                             class="fas fa-trash-alt"></i></a>
                                 </td>
                             @endif
                         </tr>
@@ -99,7 +103,7 @@
             $('#name').val(name);
             $('#description').val(des);
         });
-    });
+    
 </script>
 
 @endsection
