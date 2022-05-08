@@ -220,4 +220,29 @@ class InventoryPurchaseOrderController extends Controller
         return redirect('/purchase-show-all')->with('success', 'Successfully Deleted');
     }
 
+    public function purchaseItemReport()
+    {
+        $from=substr(Carbon::now()->subDays(30),0,10);
+        $to=substr(Carbon::now()->tomorrow(),0,10);
+        $filter_by='';
+        $purchase_items=[];
+      
+
+        $purchase_items = DB::table('inventory_purchase_items')
+            ->join('inventory_items', 'inventory_items.id', '=', 'inventory_purchase_items.item_id')
+            ->join('inventory_purchase_orders','inventory_purchase_orders.id','=','inventory_purchase_items.purchase_order_id')
+            ->select('inventory_purchase_items.item_id','inventory_purchase_items.warranty','inventory_purchase_orders.pur_ord_amount','inventory_items.item_name','inventory_purchase_orders.pur_ord_bill_no',
+            DB::raw('SUM(inventory_purchase_items.pur_item_qty) as qty'))
+        // ->groupBy('inventory_purchase_items.item_id','inventory_purchase_items.warranty','inventory_purchase_orders.pur_ord_amount','inventory_items.item_name','inventory_purchase_orders.pur_ord_bill_no')
+
+            ->where('inventory_items.created_at','>=',$from)
+            ->where('inventory_items.created_at','<=',$to)    
+            ->get();
+
+        //return  $purchase_items;
+
+       return view('inventory.Report.PurchaseReport',['filter_by'=>$filter_by,'from'=>$from,'to'=>$to,'Item'=>$purchase_items]);
+
+    }
+
 }
