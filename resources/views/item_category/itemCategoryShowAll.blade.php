@@ -3,25 +3,16 @@
 @section('content')
 <?php 
   $Access=session()->get('Access'); 
-  $itemTypeAdd=true;
-  $itemTypeEdit=true;
-  
-  if (in_array('inventory.productTypeAddProcess', $Access)) {
-    $itemTypeAdd=true;
-  }
-
-  if (in_array('inventory.productTypeUpdateProcess', $Access)) {
-    $itemTypeEdit=true;
-  }
+ 
 ?>
 
   <!-- Main Content -->
   <div class="card">                
   <div class="card-header">
     <h4 class="header">Item Category</h4>
-    @if ($itemTypeAdd)
+  
         <button data-toggle="modal" data-target="#add" id="btn-add" class="btn btn-success">Add</button>
-    @endif
+    
   </div>
                   
   <div class="card-body">
@@ -32,9 +23,9 @@
             <th>Id</th>
             <th>Name</th>
             <th>Description</th>
-            @if ($itemTypeEdit)
+           
               <th style="text-align: center">Action</th>
-            @endif
+           
           </tr>
         </thead>
         
@@ -44,7 +35,7 @@
               <td >{{$item_category->id}}</td>
               <td>{{$item_category->item_cat_name}}</td>
               <td>{{$item_category->item_cat_des}}</td>
-              @if ($itemTypeEdit)
+              
                 <td class='action'>
                   <button data-toggle="modal" data-id="{{$item_category->id}}" 
                   data-name="{{$item_category->item_cat_name}}" data-des="{{$item_category->item_cat_des}}" 
@@ -53,7 +44,7 @@
                   <a  onclick="return confirm('Are you sure you want to delete this raw?');" href="/item-cat-delete-all/{{$item_category->id}}" class="btn btn-icon btn-danger btn-edit"> <i
                                              class="fas fa-trash-alt"></i></a>
                 </td>
-              @endif
+              
             </tr>
           @endforeach
         </tbody>

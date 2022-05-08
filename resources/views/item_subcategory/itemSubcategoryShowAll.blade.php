@@ -3,25 +3,16 @@
 @section('content')
 <?php 
   $Access=session()->get('Access'); 
-  $itemTypeAdd=false;
-  $itemTypeEdit=false;
   
-  if (in_array('inventory.productTypeAddProcess', $Access)) {
-    $itemTypeAdd=true;
-  }
-
-  if (in_array('inventory.productTypeUpdateProcess', $Access)) {
-    $itemTypeEdit=true;
-  }
 ?>
 
   <!-- Main Content -->
   <div class="card">                
   <div class="card-header">
     <h4 class="header">Item Subcategory</h4>
-    {{--  @if ($productTypeAdd)  --}}
+   
         <button data-toggle="modal" data-target="#add" id="btn-add" class="btn btn-success">Add</button>
-    {{--  @endif  --}}
+    
   </div>
                   
   <div class="card-body">
@@ -33,9 +24,9 @@
             <th>Item Subcategory</th>
             <th>Item Category</th>
             <th>Description</th>
-            {{--  @if ($productTypeEdit)  --}}
+           
               <th style="text-align: center">Action</th>
-            {{--  @endif  --}}
+          
           </tr>
         </thead>
         
@@ -46,11 +37,11 @@
               <td>{{$item_subcategory->item_subcat_name}}</td>
               <td>{{$item_subcategory->item_cat_name }}</td>
               <td>{{$item_subcategory->item_subcat_des}}</td>
-              {{--  @if ($productTypeEdit)  --}}
+             
                 <td class='action'>
                   <button data-toggle="modal" data-id="{{$item_subcategory->id}}" data-name="{{$item_subcategory->item_subcat_name}}" data-category="{{$item_subcategory->item_cat_id}}" data-des="{{$item_subcategory->item_subcat_des}}" data-target="#add" title="edit" class="btn btn-primary btn-edit"><i class="far fa-edit"></i></button>
                 </td>
-              {{--  @endif  --}}
+              
             </tr>
           @endforeach
         </tbody>

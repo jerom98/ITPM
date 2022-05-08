@@ -2,16 +2,9 @@
 @section('item_brand','active')
 @section('content')
 
-<?php 
+ <?php 
   $Access=session()->get('Access'); 
-  $brandAdd=true;
-  $brandEdit=true;
-  if (in_array('inventory.brandAdd', $Access)) {
-    $brandAdd=true;
-  }
-  if (in_array('inventory.brandUpdate', $Access)) {
-    $brandEdit=true;
-  }
+ 
 ?>
 
 
@@ -19,10 +12,10 @@
 <div class="card">
     <div class="card-header">
         <h4 class="header id">Item Brand</h4>
-        @if ($brandAdd)
+     
             <button data-toggle="modal" data-target="#add" id="btn-add" class="btn btn-success">Add</button>
-           <!-- <a href="/brandGet" class="btn btn-success" id="btn-add" data-toggle="modal" data-target="#add">Add</a> -->
-        @endif
+          
+
     </div>
 
     <div class="card-body">
@@ -33,9 +26,9 @@
                         <th>Id</th>
                         <th>Brand</th>
                         <th>Description</th>
-                        @if ($brandEdit)
+                      
                             <th class='action'>Action</th>
-                        @endif
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -47,33 +40,36 @@
                             <td>{{ $brand->brand_des }}</td>
                             
                            
-                            @if ($brandEdit)
+                           
                             <td class='action'>
                                     <button data-toggle="modal" data-id="{{ $brand->id }}"
                                         data-brand="{{ $brand->brand_name }}" data-des="{{ $brand->brand_des }}"
                                         data-target="#add" title="edit" class="btn btn-primary btn-edit"><i
                                             class="far fa-edit"></i></button>
+                                            
 
                                             
                                             <a  onclick="return confirm('Are you sure you want to delete this raw?');" href="/brands-delete-all/{{$brand->id}}" class="btn btn-icon btn-danger btn-edit"> <i
                                              class="fas fa-trash-alt"></i></a>
                                 </td>
-                            @endif
+                            
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-</div>
+ </div>
 
     
-<script>
+ <script>
     $(document).ready(function() {
         if(!@json($errors->isEmpty())) {
             console.log("erorr");
             $('#add').modal();
         }
+
+    });
 
   
 
@@ -103,8 +99,8 @@
             $('#name').val(name);
             $('#description').val(des);
         });
-    
-</script>
+   
+    </script>
 
 @endsection
 

@@ -3,25 +3,17 @@
 @section('content')
     <?php
     $Access = session()->get('Access');
-    $productAdd = true;
-    $productEdit = true;
-    if (in_array('inventory.productAdd', $Access)) {
-        $productAdd = true;
-    }
-    if (in_array('inventory.productUpdate', $Access)) {
-        $productEdit = true;
-    }
+   
     ?>
 
     <!-- Main Content -->
     <div class="card">
         <div class="card-header">
             <h4 class="header">Item</h4>
-            {{-- <a href="/productGet" class="btn btn-primary">Add</a> --}}
-            @if ($productAdd)
+           
                 <button data-toggle="modal" data-target="#add" title="edit" id="btn-add"
                     class="btn btn-success add">Add</button>
-            @endif
+           
         </div>
 
         <div class="card-body">
@@ -32,13 +24,14 @@
                             <th>Id</th>
                             <th>Name</th>
                             <th>Modal</th>
-                            <th>Description</th>
+                          
                             <th>Product Brand</th>
                             <th>Product category</th>
                             <th>Product Subcategory</th>
-                            @if ($productEdit)
+                            <th>Description</th>
+                            
                                 <th class='action'>Action</th>
-                            @endif
+                            
                         </tr>
                     </thead>
 
@@ -49,11 +42,12 @@
                                 <td>{{$item->id}}</td>
                                 <td>{{ $item->item_name }}</td>
                                 <td>{{ $item->item_code }}</td>
-                                <td>{{ $item->item_des }}</td>
+                                
                                 <td>{{ $item->brand_name }}</td>
                                 <td>{{ $item->item_cat_name }}</td>
                                 <td>{{ $item->item_subcat_name }}</td>
-                                @if ($productEdit)
+                                <td>{{ $item->item_des }}</td>
+                               
                                     <td class='action'>
 
                                     
@@ -61,12 +55,27 @@
                                             data-name="{{ $item->item_name }}" data-code="{{ $item->item_code }}"
                                             data-des="{{ $item->item_des }}" data-brand="{{ $item->brand_id }}"
                                             data-subcat="{{ $item->subcat_id }}" data-catid="{{ $item->item_cat_id }}"
+                                            data-target="#add" title="view" class="btn btn-info btn-view"><i
+                                                class="far fa-eye"></i></button>
+
+
+                                                <button data-toggle="modal" data-id="{{ $item->id }}"
+                                            data-name="{{ $item->item_name }}" data-code="{{ $item->item_code }}"
+                                            data-des="{{ $item->item_des }}" data-brand="{{ $item->brand_id }}"
+                                            data-subcat="{{ $item->subcat_id }}" data-catid="{{ $item->item_cat_id }}"
                                             data-target="#add" title="edit" class="btn btn-primary btn-edit"><i
                                                 class="far fa-edit"></i></button>
+ 
+ 
+                                             
+
+                                             <a  onclick="return confirm('Are you sure you want to delete this raw?');" href="/items-delete-all/{{$item->id}}" class="btn btn-icon btn-danger btn-edit"> <i
+                                             class="fas fa-trash-alt"></i></a>
+                                            
 
                                                 
                                     </td>
-                                @endif
+                                
                             </tr>
                         @endforeach
                     </tbody>
