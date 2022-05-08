@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 class InventoryItemController extends Controller
 {
     public function itemShowAll()
@@ -31,7 +32,7 @@ class InventoryItemController extends Controller
        // return $request;
         if ($request->id==null) {
             $request->validate([
-                'name' => 'required||unique:inventory_items,item_name',
+                 'name' => 'required||unique:inventory_items,item_name',
                 'code' => 'required||unique:inventory_items,item_code',
                 'subcategory' => 'required',
                 'brand' => 'required',
@@ -44,19 +45,17 @@ class InventoryItemController extends Controller
             $item->brand_id=$request->brand;
             $item->subcat_id=$request->subcategory;
             $item->item_des=$request->description;
-            $item->user_id=Auth::user()->emp_id;
+           
             $item->save();
 
            
 
-            $actvity = 'Add New Item, Item_id :-  - '. $item->id;
-            $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
-
+           
             return redirect('/item-show-all')->with('success','Successfully Recorded');
         }else {
             $item=InventoryItem::find($request->id);
             $request->validate([
-                'name' => 'required||unique:inventory_items,item_name,'.$item->id,
+                // 'name' => 'required||unique:inventory_items,item_name,'.$item->id,
                 'code' => 'required||unique:inventory_items,item_code,'.$item->id,
                 'subcategory' => 'required',
                 'brand' => 'required'
@@ -71,8 +70,7 @@ class InventoryItemController extends Controller
 
             //return  $item;
 
-            $actvity = 'Update Item, Item_id :-  - '. $item->id;
-            $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
+            
 
             return redirect('/item-show-all')->with('success','Successfully Updated');
         }
@@ -84,6 +82,7 @@ class InventoryItemController extends Controller
         $item=InventoryItem::find($request->product_id);
         return $item;
     }
+
 
     public function delete($id)
 
@@ -153,4 +152,5 @@ class InventoryItemController extends Controller
         
 
           }
+        
 }
