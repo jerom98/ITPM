@@ -208,4 +208,16 @@ class InventoryPurchaseOrderController extends Controller
 
         return view('inventory.purchase.purchaseView', compact('purchase_order', 'permanent_purchase_items', 'sellers', 'products'));
     }
+
+    public function delete($id)
+    {
+        
+        $purchase_order=InventoryPurchaseOrder::find($id);
+        $permanent_purchase_item = InventoryPurchaseItem::where('purchase_order_id', '=', $purchase_order->id)->delete();
+      // return $id;
+        $purchase_order->delete();
+ 
+        return redirect('/purchase-show-all')->with('success', 'Successfully Deleted');
+    }
+
 }
