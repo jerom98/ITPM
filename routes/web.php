@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () { //' '
     // item category
     Route::get('/item-category-show-all',[InventoryItemCategoryController::class,'itemCategoryShowAll'])->name('inventory.itemCategoryShowAll');
     Route::post('/item-category-add-process',[InventoryItemCategoryController::class,'itemCategoryAddProcess'])->name('inventory.itemCategoryAddProcess');
+    Route::get('/item-cat-delete-all/{id}',[InventoryItemCategoryController::class,'delete']);
 
     // item subcategory
     Route::get('/item-subcategory-show-all',[InventoryItemSubcategoryController::class,'itemSubcategoryShowAll'])->name('inventory.itemSubcategoryShowAll');
