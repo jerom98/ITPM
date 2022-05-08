@@ -6,6 +6,7 @@ use App\Models\InventoryItem;
 use App\Models\InventoryItemCategory;
 use App\Models\InventoryItemSubcategory;
 use App\Models\InventoryItemBrand;
+use App\Models\InventoryPurchaseItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -89,6 +90,7 @@ class InventoryItemController extends Controller
     {
         // return $id;
         $item=InventoryItem::find($id);
+        $permanent_purchase_item = InventoryPurchaseItem::where('item_id', '=', $item->id)->delete();
         $item->delete();
 
         return redirect('/item-show-all')->with('success','Successfully Delete');
