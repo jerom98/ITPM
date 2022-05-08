@@ -57,9 +57,6 @@ class InventoryPurchaseOrderController extends Controller
         $purchase_order->user_id = Auth::user()->emp_id;
         $purchase_order->save();
 
-        $actvity = 'Add New PurchaseOrder, Purchase_order_id :- '. $purchase_order->id;
-        $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
-
         $length = count($request->qty);
         for ($i = 0; $i < $length; $i++) {
             $purchase_item = new InventoryPurchaseItem();
@@ -74,8 +71,6 @@ class InventoryPurchaseOrderController extends Controller
             $purchase_item->user_id = Auth::user()->emp_id;
             $purchase_item->save();
             
-            $actvity = 'Add New InventoryPurchaseItem, Inventory_purchase_item_id :- '. $purchase_item->id;
-            $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
         }
 
         if ($request->img_1 != null || $request->img_1 != null || $request->img_1 != null) {
@@ -166,9 +161,6 @@ class InventoryPurchaseOrderController extends Controller
 
         $purchase_order->save();
 
-        $actvity = 'Update PurchaseOrder, Purchase_order_id :-'. $purchase_order->id;
-        $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
-
         $permanent_purchase_item = InventoryPurchaseItem::where('purchase_order_id', '=', $purchase_order->id)->delete();
         
         $length = count($request->qty);
@@ -184,8 +176,6 @@ class InventoryPurchaseOrderController extends Controller
                 $permanent_purchase_item->description = $request->description[$i];
                 $permanent_purchase_item->save();
                 
-                $actvity = 'Add New InventoryPurchaseItem, Inventory_purchase_item_id :- '. $permanent_purchase_item->id;
-                $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
         }
         return redirect('/purchase-show-all')->with('success', 'Successfully Updated');
     }
