@@ -54,4 +54,15 @@ class InventoryItemBrandController extends Controller
             return redirect('/item-brand-show-all')->with('success','Successfully Updated');
         }
     }
+
+    public function delete($id)
+
+    {
+        
+        $brands=InventoryItemBrand::find($id);
+        $brands->delete();
+        //return $id;
+
+        return redirect('/item-brand-show-all')->with('success','Successfully Delete');
+    }
 }
