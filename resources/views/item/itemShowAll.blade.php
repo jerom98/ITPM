@@ -1,7 +1,17 @@
 @extends('layouts.navigation')
 @section('item', 'active')
 @section('content')
-  
+    <?php
+    $Access = session()->get('Access');
+    $productAdd = true;
+    $productEdit = true;
+    if (in_array('inventory.productAdd', $Access)) {
+        $productAdd = true;
+    }
+    if (in_array('inventory.productUpdate', $Access)) {
+        $productEdit = true;
+    }
+    ?>
 
     <!-- Main Content -->
     <div class="card">

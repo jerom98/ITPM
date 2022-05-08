@@ -32,7 +32,8 @@ class InventoryItemBrandController extends Controller
             $brands->user_id=Auth::user()->emp_id;
             $brands->save();
 
-            
+            $actvity = 'Add New Brand, Brand_id :-  - '. $brands->id;
+            $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
 
             return redirect('/item-brand-show-all')->with('success','Successfully Recorded');
         } else {
@@ -47,7 +48,8 @@ class InventoryItemBrandController extends Controller
             $brands->brand_des=$request->description;
             $brands->save();
 
-            
+            $actvity = 'Upadte Brand, Brand_id :-  - '. $brands->id;
+            $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
 
             return redirect('/item-brand-show-all')->with('success','Successfully Updated');
         }

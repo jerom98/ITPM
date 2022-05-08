@@ -33,7 +33,8 @@ class InventoryItemSubcategoryController extends Controller
             $item_subcategory->user_id=Auth::user()->emp_id;
             $item_subcategory->save();
 
-            
+            $actvity = 'Add New Item Subcategory, Subcategory_id :-  - '. $item_subcategory->id;
+            $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
 
             return redirect('/item-subcategory-show-all')->with('success','Successfully Recorded');
         } else {
@@ -46,6 +47,9 @@ class InventoryItemSubcategoryController extends Controller
             $item_subcategory->item_cat_id =$request->item_cat_id;
             $item_subcategory->item_subcat_des=$request->description;
             $item_subcategory->save();
+
+            $actvity = 'Update Item Subcategory, Subcategory_id :-  - '. $item_subcategory->id;
+            $a = app('App\Http\Controllers\ActivityLogController')->index($actvity);
 
             return redirect('/item-subcategory-show-all')->with('success','Successfully Updated');
         }

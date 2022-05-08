@@ -1,7 +1,9 @@
 @extends('layouts.navigation')
 @section('item_report','active')
 @section('content')
-
+<?php 
+  $Access=session()->get('Access'); 
+?>
 
 
       <!-- Main Content -->

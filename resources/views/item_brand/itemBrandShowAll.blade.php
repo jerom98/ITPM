@@ -2,7 +2,17 @@
 @section('item_brand','active')
 @section('content')
 
-
+<?php 
+  $Access=session()->get('Access'); 
+  $brandAdd=true;
+  $brandEdit=true;
+  if (in_array('inventory.brandAdd', $Access)) {
+    $brandAdd=true;
+  }
+  if (in_array('inventory.brandUpdate', $Access)) {
+    $brandEdit=true;
+  }
+?>
 
 
 <!-- Main Content -->
