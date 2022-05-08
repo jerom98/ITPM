@@ -49,6 +49,9 @@
                   <button data-toggle="modal" data-id="{{$item_category->id}}" 
                   data-name="{{$item_category->item_cat_name}}" data-des="{{$item_category->item_cat_des}}" 
                   data-target="#add" title="edit" class="btn btn-primary btn-edit"><i class="far fa-edit"></i></button>
+
+                  <a  onclick="return confirm('Are you sure you want to delete this raw?');" href="/item-cat-delete-all/{{$item_category->id}}" class="btn btn-icon btn-danger btn-edit"> <i
+                                             class="fas fa-trash-alt"></i></a>
                 </td>
               @endif
             </tr>

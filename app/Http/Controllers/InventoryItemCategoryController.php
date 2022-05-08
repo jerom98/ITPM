@@ -46,4 +46,19 @@ class InventoryItemCategoryController extends Controller
         return redirect('/item-category-show-all')->with('success','Successfully Updated');
     }
    }
+
+   public function delete($id)
+
+   {
+       //return $id;
+       $item_category=InventoryItemCategory::find($id);
+       $itam=InventoryItem::where('category_id', '=', $item_category->id)->delete();
+       $itam=InventoryItemSubcategory::where('item_cat_id', '=', $item_category->id)->delete();
+      
+       $item_category->delete();
+
+       //return $item_category;
+
+       return redirect('/item-category-show-all')->with('success','Successfully Delete');
+   }
 }
